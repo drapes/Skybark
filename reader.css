@@ -75,6 +75,26 @@ h1 {
   flex-shrink: 0;
 }
 
+.library-link {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 246, 231, 0.25);
+  border-radius: 999px;
+  color: var(--cream);
+  background: rgba(255, 246, 231, 0.1);
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.library-link:is(:hover, :focus-visible) {
+  background: rgba(255, 246, 231, 0.2);
+  outline: none;
+}
+
 .icon-button {
   width: 44px;
   height: 44px;
@@ -286,6 +306,20 @@ h1 {
   opacity: 1;
 }
 
+.reader-error {
+  max-width: 640px;
+  margin: auto;
+  padding: 24px;
+  color: var(--cream);
+  text-align: center;
+}
+
+.reader-error .intro {
+  margin: 12px 0 20px;
+  color: rgba(255, 246, 231, 0.78);
+  font-size: 1.06rem;
+}
+
 @keyframes turnNext {
   0% {
     transform: rotateY(0deg) translateZ(2px);
@@ -336,6 +370,12 @@ h1 {
 
   .reader-actions {
     gap: 6px;
+  }
+
+  .library-link {
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: 0.78rem;
   }
 
   .icon-button {

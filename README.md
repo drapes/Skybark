@@ -3,8 +3,11 @@ The Adventures of Skybark and Bitebolt
 
 ## Episodes
 
-- [Episode 01: The Missing Sunbeam](episodes/episode-01/)
-- [Episode 02: The Great Flood](episodes/episode-02/)
-- [Episode 03: The Palo Alto Squiral Siege](episodes/episode-03/)
+- [Episode 01: The Missing Sunbeam](reader.html?episode=episode-01)
+- [Episode 02: The Great Flood](reader.html?episode=episode-02)
+- [Episode 03: The Palo Alto Squiral Siege](reader.html?episode=episode-03)
+- [Episode 04: The Calgary Cup Caper](reader.html?episode=episode-04)
+- [Episode 05: The Sutro Surfkite Rescue](reader.html?episode=episode-05)
+- [Episode 06: The Sonoma Cheese Flight](reader.html?episode=episode-06)
 
-Each episode folder contains a self-contained HTML/CSS/JavaScript comic reader and the images it references.
+`reader.html` is the shared comic reader. Episode metadata, cover paths, and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.

@@ -1,18 +1,10 @@
-const pages = [
-  { title: "Cover", src: "images/cover.png" },
-  { title: "Page 1", src: "images/page-01.png" },
-  { title: "Page 2", src: "images/page-02.png" },
-  { title: "Page 3", src: "images/page-03.png" },
-  { title: "Page 4", src: "images/page-04.png" },
-  { title: "Page 5", src: "images/page-05.png" },
-  { title: "Page 6", src: "images/page-06.png" },
-  { title: "Page 7", src: "images/page-07.png" },
-  { title: "Page 8", src: "images/page-08.png" },
-  { title: "Page 9", src: "images/page-09.png" },
-  { title: "Page 10", src: "images/page-10.png" },
-  { title: "End", src: "images/end-silent.png" }
-];
+const params = new URLSearchParams(window.location.search);
+const episodes = window.SKYBARK_EPISODES || [];
+const requestedEpisode = params.get("episode") || (episodes[0] && episodes[0].id);
+const episode = episodes.find((entry) => entry.id === requestedEpisode);
+const pages = episode ? episode.pages : [];
 
+const episodeTitle = document.querySelector("#episodeTitle");
 const book = document.querySelector("#book");
 const basePage = document.querySelector("#basePage");
 const flipSheet = document.querySelector("#flipSheet");
@@ -29,6 +21,17 @@ let currentPage = 0;
 let turning = false;
 let touchStartX = 0;
 let touchStartY = 0;
+
+function showReaderError() {
+  document.body.innerHTML = `
+    <main class="reader-error">
+      <p class="kicker">The Adventures of Skybark and Bitebolt</p>
+      <h1>Episode not found</h1>
+      <p class="intro">Head back to the library to choose an available episode.</p>
+      <p><a class="library-link" href="index.html">Library</a></p>
+    </main>
+  `;
+}
 
 function preloadImages() {
   pages.forEach((page) => {
@@ -102,18 +105,23 @@ function turnTo(targetPage) {
 }
 
 function buildThumbnails() {
-  pages.forEach((page, index) => {
+  const thumbnails = pages.map((page, index) => {
     const button = document.createElement("button");
     const img = document.createElement("img");
+
     button.className = "thumb";
     button.type = "button";
     button.setAttribute("aria-label", page.title);
+
     img.src = page.src;
     img.alt = "";
+
     button.append(img);
     button.addEventListener("click", () => turnTo(index));
-    thumbTrack.append(button);
+    return button;
   });
+
+  thumbTrack.replaceChildren(...thumbnails);
 }
 
 function onTouchStart(event) {
@@ -138,14 +146,7 @@ function onTouchEnd(event) {
   }
 }
 
-prevButton.addEventListener("click", () => turnTo(currentPage - 1));
-nextButton.addEventListener("click", () => turnTo(currentPage + 1));
-leftZone.addEventListener("click", () => turnTo(currentPage - 1));
-rightZone.addEventListener("click", () => turnTo(currentPage + 1));
-book.addEventListener("touchstart", onTouchStart, { passive: true });
-book.addEventListener("touchend", onTouchEnd, { passive: true });
-
-window.addEventListener("keydown", (event) => {
+function onKeyDown(event) {
   if (event.key === "ArrowLeft") {
     turnTo(currentPage - 1);
   }
@@ -153,8 +154,31 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight" || event.key === " ") {
     turnTo(currentPage + 1);
   }
-});
+}
 
-preloadImages();
-buildThumbnails();
-renderStaticPage();
+function bindReaderControls() {
+  prevButton.addEventListener("click", () => turnTo(currentPage - 1));
+  nextButton.addEventListener("click", () => turnTo(currentPage + 1));
+  leftZone.addEventListener("click", () => turnTo(currentPage - 1));
+  rightZone.addEventListener("click", () => turnTo(currentPage + 1));
+  book.addEventListener("touchstart", onTouchStart, { passive: true });
+  book.addEventListener("touchend", onTouchEnd, { passive: true });
+  window.addEventListener("keydown", onKeyDown);
+}
+
+function initReader() {
+  if (!episode || pages.length === 0) {
+    showReaderError();
+    return;
+  }
+
+  document.title = `Skybark & Bitebolt: ${episode.title}`;
+  episodeTitle.textContent = episode.title;
+
+  preloadImages();
+  buildThumbnails();
+  bindReaderControls();
+  renderStaticPage();
+}
+
+initReader();

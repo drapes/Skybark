@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Skybark &amp; Bitebolt: The Sutro Surfkite Rescue</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Skybark &amp; Bitebolt Reader</title>
+    <link rel="stylesheet" href="reader.css">
   </head>
   <body>
     <main class="reader-shell" aria-label="Skybark and Bitebolt comic reader">
       <header class="reader-bar">
         <div>
           <p class="kicker">The Adventures of Skybark and Bitebolt</p>
-          <h1>The Sutro Surfkite Rescue</h1>
+          <h1 id="episodeTitle">Loading...</h1>
         </div>
         <div class="reader-actions" aria-label="Reader controls">
+          <a class="library-link" href="index.html">Library</a>
           <button class="icon-button" id="prevButton" type="button" aria-label="Previous page" title="Previous page">
             <span aria-hidden="true">‹</span>
           </button>
@@ -50,6 +51,7 @@
       </footer>
     </main>
 
-    <script src="app.js"></script>
+    <script src="episodes/catalog.js"></script>
+    <script src="reader.js"></script>
   </body>
 </html>

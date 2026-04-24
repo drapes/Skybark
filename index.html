@@ -4,121 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Adventures of Skybark and Bitebolt</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        font-family: Avenir Next, Avenir, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        margin: 0;
-        background:
-          radial-gradient(circle at 18% 12%, rgba(242, 189, 91, 0.18), transparent 28rem),
-          linear-gradient(135deg, #253f47 0%, #192729 42%, #3e2825 100%);
-        color: #fff6e7;
-      }
-
-      main {
-        width: min(1120px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 42px 0;
-      }
-
-      h1,
-      p {
-        margin: 0;
-      }
-
-      h1 {
-        font-size: clamp(2rem, 6vw, 4.8rem);
-        line-height: 0.95;
-        max-width: 820px;
-      }
-
-      .intro {
-        margin-top: 12px;
-        color: rgba(255, 246, 231, 0.78);
-        font-size: 1.06rem;
-      }
-
-      .episodes {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 22px;
-        margin-top: 34px;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .episode {
-        display: block;
-      }
-
-      .episode img {
-        width: 100%;
-        aspect-ratio: 2 / 3;
-        display: block;
-        object-fit: cover;
-        border-radius: 8px;
-        box-shadow: 0 24px 42px rgba(0, 0, 0, 0.34);
-      }
-
-      .episode h2 {
-        margin: 12px 0 4px;
-        font-size: 1.05rem;
-      }
-
-      .episode p {
-        color: rgba(255, 246, 231, 0.68);
-        font-weight: 700;
-      }
-    </style>
+    <link rel="stylesheet" href="library.css">
   </head>
   <body>
     <main>
       <h1>The Adventures of Skybark and Bitebolt</h1>
       <p class="intro">Choose an episode to open the touch-friendly comic reader.</p>
 
-      <section class="episodes" aria-label="Episodes">
-        <a class="episode" href="episodes/episode-01/">
-          <img src="episodes/episode-01/images/cover.png" alt="The Missing Sunbeam cover">
-          <h2>Episode 01: The Missing Sunbeam</h2>
-          <p>Open reader</p>
-        </a>
-        <a class="episode" href="episodes/episode-02/">
-          <img src="episodes/episode-02/images/cover.png" alt="The Great Flood cover">
-          <h2>Episode 02: The Great Flood</h2>
-          <p>Open reader</p>
-        </a>
-        <a class="episode" href="episodes/episode-03/">
-          <img src="episodes/episode-03/images/cover.png" alt="The Palo Alto Squiral Siege cover">
-          <h2>Episode 03: The Palo Alto Squiral Siege</h2>
-          <p>Open reader</p>
-        </a>
-        <a class="episode" href="episodes/episode-04/">
-          <img src="episodes/episode-04/images/cover.png" alt="The Calgary Cup Caper cover">
-          <h2>Episode 04: The Calgary Cup Caper</h2>
-          <p>Open reader</p>
-        </a>
-        <a class="episode" href="episodes/episode-05/">
-          <img src="episodes/episode-05/images/cover.png" alt="The Sutro Surfkite Rescue cover">
-          <h2>Episode 05: The Sutro Surfkite Rescue</h2>
-          <p>Open reader</p>
-        </a>
-        <a class="episode" href="episodes/episode-06/">
-          <img src="episodes/episode-06/images/cover.png" alt="The Sonoma Cheese Flight cover">
-          <h2>Episode 06: The Sonoma Cheese Flight</h2>
-          <p>Open reader</p>
-        </a>
-      </section>
+      <section class="episodes" id="episodeList" aria-label="Episodes"></section>
     </main>
+
+    <script src="episodes/catalog.js"></script>
+    <script src="library.js"></script>
   </body>
 </html>
