@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Skybark &amp; Bitebolt: The Palo Alto Squiral Siege</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="reader-shell" aria-label="Skybark and Bitebolt comic reader">
+      <header class="reader-bar">
+        <div>
+          <p class="kicker">The Adventures of Skybark and Bitebolt</p>
+          <h1>The Palo Alto Squiral Siege</h1>
+        </div>
+        <div class="reader-actions" aria-label="Reader controls">
+          <button class="icon-button" id="prevButton" type="button" aria-label="Previous page" title="Previous page">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <span class="page-counter" id="pageCounter" aria-live="polite"></span>
+          <button class="icon-button" id="nextButton" type="button" aria-label="Next page" title="Next page">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="stage" aria-label="Comic page">
+        <div class="book" id="book">
+          <div class="page-stack" aria-hidden="true"></div>
+          <button class="turn-zone turn-zone-left" id="leftZone" type="button" aria-label="Previous page"></button>
+          <button class="turn-zone turn-zone-right" id="rightZone" type="button" aria-label="Next page"></button>
+
+          <div class="page-base page-surface">
+            <img id="basePage" alt="">
+          </div>
+
+          <div class="flip-sheet" id="flipSheet" aria-hidden="true">
+            <div class="sheet-face sheet-front page-surface">
+              <img id="flipFront" alt="">
+            </div>
+            <div class="sheet-face sheet-back page-surface">
+              <img id="flipBack" alt="">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="scrubber" aria-label="Page thumbnails">
+        <div class="thumb-track" id="thumbTrack"></div>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
