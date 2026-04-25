@@ -59,6 +59,11 @@
       id: "episode-09",
       number: "09",
       title: "The Colma Brain Drain"
+    },
+    {
+      id: "episode-10",
+      number: "10",
+      title: "The Alcatraz Zoomie Breakout"
     }
   ];
 
