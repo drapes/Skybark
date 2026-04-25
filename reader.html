@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Skybark &amp; Bitebolt Reader</title>
-    <link rel="stylesheet" href="reader.css?v=read-status">
+    <link rel="stylesheet" href="reader.css?v=reader-focus-mode">
   </head>
   <body>
     <main class="reader-shell" aria-label="Skybark and Bitebolt comic reader">
@@ -15,6 +15,9 @@
         </div>
         <div class="reader-actions" aria-label="Reader controls">
           <a class="library-link" href="index.html">Library</a>
+          <button class="icon-button" id="fullscreenButton" type="button" aria-label="Enter fullscreen" title="Enter fullscreen">
+            <span class="fullscreen-icon" aria-hidden="true">⛶</span>
+          </button>
           <button class="icon-button" id="prevButton" type="button" aria-label="Previous page" title="Previous page">
             <span aria-hidden="true">‹</span>
           </button>
@@ -24,6 +27,12 @@
           </button>
         </div>
       </header>
+
+      <button class="fullscreen-top-zone" id="fullscreenTopZone" type="button" aria-label="Show fullscreen controls"></button>
+      <div class="fullscreen-overlay" id="fullscreenOverlay" aria-label="Fullscreen controls">
+        <a class="library-link" href="index.html">Library</a>
+        <button class="library-link fullscreen-exit" id="fullscreenExitButton" type="button">Exit</button>
+      </div>
 
       <section class="stage" aria-label="Comic page">
         <div class="book" id="book">
@@ -52,6 +61,6 @@
     </main>
 
     <script src="episodes/catalog.js?v=read-status"></script>
-    <script src="reader.js?v=read-status"></script>
+    <script src="reader.js?v=reader-focus-mode"></script>
   </body>
 </html>
