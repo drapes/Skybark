@@ -13,6 +13,7 @@ The Adventures of Skybark and Bitebolt
 - [Episode 08: The North Beach Bookshop Heist](reader.html?episode=episode-08)
 - [Episode 09: The Colma Brain Drain](reader.html?episode=episode-09)
 - [Episode 10: The Alcatraz Zoomie Breakout](reader.html?episode=episode-10)
+- [Episode 11: The Penguin Heat Heist](reader.html?episode=episode-11)
 - [Episode 12: The Golden Gate Picnic Pinch](reader.html?episode=episode-12)
 
 `reader.html` is the shared comic reader. Episode metadata, cover paths, and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.

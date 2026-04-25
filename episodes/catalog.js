@@ -66,6 +66,11 @@
       title: "The Alcatraz Zoomie Breakout"
     },
     {
+      id: "episode-11",
+      number: "11",
+      title: "The Penguin Heat Heist"
+    },
+    {
       id: "episode-12",
       number: "12",
       title: "The Golden Gate Picnic Pinch"
