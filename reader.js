@@ -4,6 +4,7 @@ const requestedEpisode = params.get("episode") || (episodes[0] && episodes[0].id
 const episode = episodes.find((entry) => entry.id === requestedEpisode);
 const pages = episode ? episode.pages : [];
 
+const readerShell = document.querySelector(".reader-shell");
 const episodeTitle = document.querySelector("#episodeTitle");
 const book = document.querySelector("#book");
 const basePage = document.querySelector("#basePage");
@@ -16,12 +17,17 @@ const leftZone = document.querySelector("#leftZone");
 const rightZone = document.querySelector("#rightZone");
 const pageCounter = document.querySelector("#pageCounter");
 const thumbTrack = document.querySelector("#thumbTrack");
+const fullscreenButton = document.querySelector("#fullscreenButton");
+const fullscreenExitButton = document.querySelector("#fullscreenExitButton");
+const fullscreenTopZone = document.querySelector("#fullscreenTopZone");
 const progressCookieName = "skybarkReadProgress";
 
 let currentPage = 0;
 let turning = false;
 let touchStartX = 0;
 let touchStartY = 0;
+let fullscreenMode = false;
+let fullscreenControlsOpen = false;
 
 function readCookie(name) {
   const prefix = `${name}=`;
@@ -54,6 +60,49 @@ function saveProgress() {
   const previousPage = typeof progress[episode.id] === "number" ? progress[episode.id] : -1;
   progress[episode.id] = Math.max(previousPage, currentPage);
   writeCookie(progressCookieName, JSON.stringify(progress));
+}
+
+function fullscreenActive() {
+  return fullscreenMode;
+}
+
+function updateFullscreenButton() {
+  const active = fullscreenActive();
+  fullscreenButton.setAttribute("aria-label", active ? "Exit fullscreen" : "Enter fullscreen");
+  fullscreenButton.title = active ? "Exit fullscreen" : "Enter fullscreen";
+  fullscreenButton.querySelector(".fullscreen-icon").textContent = active ? "×" : "⛶";
+  document.body.classList.toggle("reader-fullscreen", active);
+  readerShell.classList.toggle("is-fullscreen", active);
+  readerShell.classList.toggle("fullscreen-controls-open", active && fullscreenControlsOpen);
+}
+
+function enterFullscreen() {
+  fullscreenMode = true;
+  fullscreenControlsOpen = false;
+  updateFullscreenButton();
+}
+
+function exitFullscreen() {
+  fullscreenMode = false;
+  fullscreenControlsOpen = false;
+  updateFullscreenButton();
+}
+
+function showFullscreenControls() {
+  if (!fullscreenMode) {
+    return;
+  }
+
+  fullscreenControlsOpen = true;
+  updateFullscreenButton();
+}
+
+function toggleFullscreen() {
+  if (fullscreenActive()) {
+    exitFullscreen();
+  } else {
+    enterFullscreen();
+  }
 }
 
 function showReaderError() {
@@ -189,9 +238,16 @@ function onKeyDown(event) {
   if (event.key === "ArrowRight" || event.key === " ") {
     turnTo(currentPage + 1);
   }
+
+  if (event.key === "Escape" && fullscreenMode) {
+    exitFullscreen();
+  }
 }
 
 function bindReaderControls() {
+  fullscreenButton.addEventListener("click", toggleFullscreen);
+  fullscreenExitButton.addEventListener("click", exitFullscreen);
+  fullscreenTopZone.addEventListener("click", showFullscreenControls);
   prevButton.addEventListener("click", () => turnTo(currentPage - 1));
   nextButton.addEventListener("click", () => turnTo(currentPage + 1));
   leftZone.addEventListener("click", () => turnTo(currentPage - 1));

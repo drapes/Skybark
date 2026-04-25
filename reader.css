@@ -10,6 +10,7 @@
   --panel-purple: #35105f;
   --shadow: rgba(6, 3, 12, 0.56);
   --page-width: min(72vw, 680px, calc((100dvh - 178px) * 0.6667));
+  --page-width-fullscreen: min(100vw, calc(100dvh * 0.6667));
   font-family: Avenir Next, Avenir, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -45,6 +46,41 @@ button {
   gap: 14px;
 }
 
+.reader-shell.is-fullscreen {
+  --page-width: var(--page-width-fullscreen);
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  width: 100vw;
+  min-height: 100dvh;
+  padding: 0;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.5px) 0 0 / 16px 16px,
+    linear-gradient(120deg, rgba(242, 58, 145, 0.28), transparent 34%),
+    linear-gradient(240deg, rgba(95, 178, 70, 0.24), transparent 36%),
+    linear-gradient(135deg, #160627 0%, var(--deep-purple) 50%, #071e19 100%);
+}
+
+.reader-shell.is-fullscreen .reader-bar,
+.reader-shell.is-fullscreen .scrubber {
+  display: none;
+}
+
+.reader-shell.is-fullscreen .stage {
+  min-height: 100dvh;
+  padding: 0;
+}
+
+.reader-shell.is-fullscreen .book {
+  filter: none;
+}
+
+.reader-shell.is-fullscreen .page-stack {
+  display: none;
+}
+
 .reader-bar {
   width: min(100%, 960px);
   margin: 0 auto;
@@ -62,6 +98,48 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+}
+
+.fullscreen-top-zone,
+.fullscreen-overlay {
+  display: none;
+}
+
+.reader-shell.is-fullscreen .fullscreen-top-zone {
+  position: fixed;
+  z-index: 25;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 22vh;
+  display: block;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reader-shell.is-fullscreen .fullscreen-top-zone:focus {
+  outline: none;
+}
+
+.reader-shell.fullscreen-controls-open .fullscreen-overlay {
+  position: fixed;
+  z-index: 35;
+  top: max(12px, env(safe-area-inset-top));
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid rgba(244, 200, 78, 0.72);
+  border-radius: 8px;
+  background: rgba(22, 6, 39, 0.9);
+  box-shadow:
+    0 0 0 4px var(--ink),
+    0 18px 34px var(--shadow);
 }
 
 .kicker,
@@ -114,6 +192,10 @@ h1 {
   outline: none;
 }
 
+.fullscreen-exit {
+  cursor: pointer;
+}
+
 .icon-button {
   width: 44px;
   height: 44px;
@@ -133,6 +215,11 @@ h1 {
   translate: 0 -1px;
   font-size: 2rem;
   line-height: 1;
+}
+
+.icon-button .fullscreen-icon {
+  font-size: 1.35rem;
+  translate: 0;
 }
 
 .icon-button:disabled {
@@ -270,6 +357,22 @@ h1 {
   -webkit-tap-highlight-color: transparent;
 }
 
+.reader-shell.is-fullscreen .turn-zone {
+  position: fixed;
+  z-index: 15;
+  top: 0;
+  bottom: 0;
+  width: 50vw;
+}
+
+.reader-shell.is-fullscreen .turn-zone-left {
+  left: 0;
+}
+
+.reader-shell.is-fullscreen .turn-zone-right {
+  right: 0;
+}
+
 .turn-zone-left {
   left: 0;
 }
@@ -294,8 +397,13 @@ h1 {
   overflow: hidden;
 }
 
+.reader-shell.is-fullscreen .scrubber {
+  width: min(100%, 1120px);
+}
+
 .thumb-track {
   display: flex;
+  justify-content: center;
   gap: 8px;
   overflow-x: auto;
   padding: 4px 2px 8px;
@@ -422,6 +530,10 @@ h1 {
   .thumb {
     width: 36px;
     height: 54px;
+  }
+
+  .thumb-track {
+    justify-content: flex-start;
   }
 }
 
