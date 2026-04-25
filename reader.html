@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Skybark &amp; Bitebolt Reader</title>
-    <link rel="stylesheet" href="reader.css?v=reader-focus-mode">
+    <link rel="stylesheet" href="reader.css?v=reader-flow-completion">
   </head>
   <body>
     <main class="reader-shell" aria-label="Skybark and Bitebolt comic reader">
@@ -15,6 +15,7 @@
         </div>
         <div class="reader-actions" aria-label="Reader controls">
           <a class="library-link" href="index.html">Library</a>
+          <button class="library-link resume-button" id="resumeButton" type="button" hidden>Resume</button>
           <button class="icon-button" id="fullscreenButton" type="button" aria-label="Enter fullscreen" title="Enter fullscreen">
             <span class="fullscreen-icon" aria-hidden="true">⛶</span>
           </button>
@@ -31,7 +32,20 @@
       <button class="fullscreen-top-zone" id="fullscreenTopZone" type="button" aria-label="Show fullscreen controls"></button>
       <div class="fullscreen-overlay" id="fullscreenOverlay" aria-label="Fullscreen controls">
         <a class="library-link" href="index.html">Library</a>
+        <button class="library-link resume-button" id="fullscreenResumeButton" type="button" hidden>Resume</button>
         <button class="library-link fullscreen-exit" id="fullscreenExitButton" type="button">Exit</button>
+      </div>
+
+      <div class="completion-overlay" id="completionOverlay" role="dialog" aria-modal="false" aria-labelledby="completionTitle" hidden>
+        <div class="completion-panel">
+          <p class="kicker">Episode Complete</p>
+          <h2 id="completionTitle">Nice reading!</h2>
+          <div class="completion-actions">
+            <button class="library-link fullscreen-exit" id="completionExitButton" type="button">Exit</button>
+            <a class="library-link" href="index.html">Library</a>
+            <a class="library-link" id="nextEpisodeLink" href="index.html">Next Episode</a>
+          </div>
+        </div>
       </div>
 
       <section class="stage" aria-label="Comic page">
@@ -61,6 +75,6 @@
     </main>
 
     <script src="episodes/catalog.js?v=read-status"></script>
-    <script src="reader.js?v=reader-focus-mode"></script>
+    <script src="reader.js?v=reader-flow-completion"></script>
   </body>
 </html>
