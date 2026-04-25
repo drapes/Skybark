@@ -44,6 +44,11 @@
       id: "episode-06",
       number: "06",
       title: "The Sonoma Cheese Flight"
+    },
+    {
+      id: "episode-07",
+      number: "07",
+      title: "The Citywide Toy Rescue"
     }
   ];
 
