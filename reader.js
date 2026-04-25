@@ -16,11 +16,45 @@ const leftZone = document.querySelector("#leftZone");
 const rightZone = document.querySelector("#rightZone");
 const pageCounter = document.querySelector("#pageCounter");
 const thumbTrack = document.querySelector("#thumbTrack");
+const progressCookieName = "skybarkReadProgress";
 
 let currentPage = 0;
 let turning = false;
 let touchStartX = 0;
 let touchStartY = 0;
+
+function readCookie(name) {
+  const prefix = `${name}=`;
+  const cookie = document.cookie
+    .split("; ")
+    .find((entry) => entry.startsWith(prefix));
+
+  return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : "";
+}
+
+function writeCookie(name, value) {
+  const maxAge = 60 * 60 * 24 * 365;
+  document.cookie = `${name}=${encodeURIComponent(value)}; max-age=${maxAge}; path=/; SameSite=Lax`;
+}
+
+function readProgress() {
+  try {
+    return JSON.parse(readCookie(progressCookieName)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveProgress() {
+  if (!episode) {
+    return;
+  }
+
+  const progress = readProgress();
+  const previousPage = typeof progress[episode.id] === "number" ? progress[episode.id] : -1;
+  progress[episode.id] = Math.max(previousPage, currentPage);
+  writeCookie(progressCookieName, JSON.stringify(progress));
+}
 
 function showReaderError() {
   document.body.innerHTML = `
@@ -49,6 +83,7 @@ function renderStaticPage() {
   basePage.src = page.src;
   basePage.alt = page.title;
   pageCounter.textContent = pageLabel(currentPage);
+  saveProgress();
 
   const atStart = currentPage === 0 || turning;
   const atEnd = currentPage === pages.length - 1 || turning;

@@ -4,17 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Adventures of Skybark and Bitebolt</title>
-    <link rel="stylesheet" href="library.css">
+    <link rel="stylesheet" href="library.css?v=read-status-polished-cards">
   </head>
   <body>
     <main>
-      <h1>The Adventures of Skybark and Bitebolt</h1>
-      <p class="intro">Choose an episode to open the touch-friendly comic reader.</p>
+      <header class="library-hero">
+        <div class="title-lockup">
+          <h1>The Adventures of Skybark and Bitebolt</h1>
+          <img class="title-art" src="assets/titles/skybark-bitebolt-masthead.png" alt="The Adventures of Skybark & Bitebolt">
+        </div>
+      </header>
+
+      <nav class="status-filter" aria-label="Filter episodes by read status">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-filter="new" aria-pressed="false">New</button>
+        <button class="filter-button" type="button" data-filter="partial" aria-pressed="false">Reading</button>
+        <button class="filter-button" type="button" data-filter="read" aria-pressed="false">Read</button>
+      </nav>
 
       <section class="episodes" id="episodeList" aria-label="Episodes"></section>
     </main>
 
-    <script src="episodes/catalog.js"></script>
-    <script src="library.js"></script>
+    <script src="episodes/catalog.js?v=read-status"></script>
+    <script src="library.js?v=read-status"></script>
   </body>
 </html>
