@@ -10,5 +10,6 @@ The Adventures of Skybark and Bitebolt
 - [Episode 05: The Sutro Surfkite Rescue](reader.html?episode=episode-05)
 - [Episode 06: The Sonoma Cheese Flight](reader.html?episode=episode-06)
 - [Episode 07: The Citywide Toy Rescue](reader.html?episode=episode-07)
+- [Episode 08: The North Beach Bookshop Heist](reader.html?episode=episode-08)
 
 `reader.html` is the shared comic reader. Episode metadata, cover paths, and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.
