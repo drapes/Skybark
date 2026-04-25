@@ -54,6 +54,11 @@
       id: "episode-08",
       number: "08",
       title: "The North Beach Bookshop Heist"
+    },
+    {
+      id: "episode-09",
+      number: "09",
+      title: "The Colma Brain Drain"
     }
   ];
 
