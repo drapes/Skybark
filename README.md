@@ -9,5 +9,6 @@ The Adventures of Skybark and Bitebolt
 - [Episode 04: The Calgary Cup Caper](reader.html?episode=episode-04)
 - [Episode 05: The Sutro Surfkite Rescue](reader.html?episode=episode-05)
 - [Episode 06: The Sonoma Cheese Flight](reader.html?episode=episode-06)
+- [Episode 07: The Citywide Toy Rescue](reader.html?episode=episode-07)
 
 `reader.html` is the shared comic reader. Episode metadata, cover paths, and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.
