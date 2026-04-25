@@ -64,6 +64,11 @@
       id: "episode-10",
       number: "10",
       title: "The Alcatraz Zoomie Breakout"
+    },
+    {
+      id: "episode-12",
+      number: "12",
+      title: "The Golden Gate Picnic Pinch"
     }
   ];
 
