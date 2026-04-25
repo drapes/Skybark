@@ -20,6 +20,11 @@ const thumbTrack = document.querySelector("#thumbTrack");
 const fullscreenButton = document.querySelector("#fullscreenButton");
 const fullscreenExitButton = document.querySelector("#fullscreenExitButton");
 const fullscreenTopZone = document.querySelector("#fullscreenTopZone");
+const resumeButton = document.querySelector("#resumeButton");
+const fullscreenResumeButton = document.querySelector("#fullscreenResumeButton");
+const completionOverlay = document.querySelector("#completionOverlay");
+const completionExitButton = document.querySelector("#completionExitButton");
+const nextEpisodeLink = document.querySelector("#nextEpisodeLink");
 const progressCookieName = "skybarkReadProgress";
 
 let currentPage = 0;
@@ -28,6 +33,7 @@ let touchStartX = 0;
 let touchStartY = 0;
 let fullscreenMode = false;
 let fullscreenControlsOpen = false;
+let completionShownForPage = -1;
 
 function readCookie(name) {
   const prefix = `${name}=`;
@@ -51,6 +57,33 @@ function readProgress() {
   }
 }
 
+function savedPageForEpisode(targetEpisode = episode) {
+  if (!targetEpisode) {
+    return -1;
+  }
+
+  const savedPage = readProgress()[targetEpisode.id];
+  return typeof savedPage === "number" ? savedPage : -1;
+}
+
+function hasPartialProgress(targetEpisode = episode) {
+  if (!targetEpisode) {
+    return false;
+  }
+
+  const savedPage = savedPageForEpisode(targetEpisode);
+  return savedPage > 0 && savedPage < targetEpisode.pages.length - 1;
+}
+
+function nextEpisodeForCurrent() {
+  if (!episode) {
+    return undefined;
+  }
+
+  const episodeIndex = episodes.findIndex((entry) => entry.id === episode.id);
+  return episodeIndex >= 0 ? episodes[episodeIndex + 1] : undefined;
+}
+
 function saveProgress() {
   if (!episode) {
     return;
@@ -60,6 +93,76 @@ function saveProgress() {
   const previousPage = typeof progress[episode.id] === "number" ? progress[episode.id] : -1;
   progress[episode.id] = Math.max(previousPage, currentPage);
   writeCookie(progressCookieName, JSON.stringify(progress));
+}
+
+function readerHref(episodeId) {
+  return `reader.html?episode=${encodeURIComponent(episodeId)}`;
+}
+
+function updateResumeControls() {
+  const savedPage = savedPageForEpisode();
+  const canResume = hasPartialProgress() && currentPage < savedPage;
+
+  [resumeButton, fullscreenResumeButton].forEach((button) => {
+    button.hidden = !canResume;
+    button.disabled = !canResume;
+  });
+}
+
+function hideCompletionOverlay() {
+  completionOverlay.hidden = true;
+}
+
+function showCompletionOverlay() {
+  const nextEpisode = nextEpisodeForCurrent();
+
+  if (nextEpisode) {
+    nextEpisodeLink.hidden = false;
+    nextEpisodeLink.href = readerHref(nextEpisode.id);
+    nextEpisodeLink.textContent = "Next Episode";
+    nextEpisodeLink.setAttribute("aria-disabled", "false");
+  } else {
+    nextEpisodeLink.hidden = true;
+    nextEpisodeLink.href = "index.html";
+    nextEpisodeLink.setAttribute("aria-disabled", "true");
+  }
+
+  completionOverlay.hidden = false;
+}
+
+function updateCompletionOverlay() {
+  const atFinalPage = pages.length > 0 && currentPage === pages.length - 1;
+
+  if (!atFinalPage) {
+    completionShownForPage = -1;
+    hideCompletionOverlay();
+    return;
+  }
+
+  if (completionShownForPage !== currentPage) {
+    completionShownForPage = currentPage;
+    showCompletionOverlay();
+  }
+}
+
+function jumpToPage(index) {
+  if (index < 0 || index >= pages.length) {
+    return;
+  }
+
+  currentPage = index;
+  turning = false;
+  flipSheet.className = "flip-sheet";
+  book.classList.remove("turning");
+  renderStaticPage();
+}
+
+function resumeReading() {
+  const savedPage = savedPageForEpisode();
+
+  if (hasPartialProgress() && savedPage > currentPage) {
+    jumpToPage(savedPage);
+  }
 }
 
 function fullscreenActive() {
@@ -133,6 +236,7 @@ function renderStaticPage() {
   basePage.alt = page.title;
   pageCounter.textContent = pageLabel(currentPage);
   saveProgress();
+  updateResumeControls();
 
   const atStart = currentPage === 0 || turning;
   const atEnd = currentPage === pages.length - 1 || turning;
@@ -149,12 +253,16 @@ function renderStaticPage() {
       thumb.removeAttribute("aria-current");
     }
   });
+
+  updateCompletionOverlay();
 }
 
 function turnTo(targetPage) {
   if (turning || targetPage === currentPage || targetPage < 0 || targetPage >= pages.length) {
     return;
   }
+
+  hideCompletionOverlay();
 
   const goingNext = targetPage > currentPage;
   const fromPage = pages[currentPage];
@@ -239,7 +347,9 @@ function onKeyDown(event) {
     turnTo(currentPage + 1);
   }
 
-  if (event.key === "Escape" && fullscreenMode) {
+  if (event.key === "Escape" && !completionOverlay.hidden) {
+    hideCompletionOverlay();
+  } else if (event.key === "Escape" && fullscreenMode) {
     exitFullscreen();
   }
 }
@@ -248,6 +358,12 @@ function bindReaderControls() {
   fullscreenButton.addEventListener("click", toggleFullscreen);
   fullscreenExitButton.addEventListener("click", exitFullscreen);
   fullscreenTopZone.addEventListener("click", showFullscreenControls);
+  resumeButton.addEventListener("click", resumeReading);
+  fullscreenResumeButton.addEventListener("click", resumeReading);
+  completionExitButton.addEventListener("click", () => {
+    hideCompletionOverlay();
+    exitFullscreen();
+  });
   prevButton.addEventListener("click", () => turnTo(currentPage - 1));
   nextButton.addEventListener("click", () => turnTo(currentPage + 1));
   leftZone.addEventListener("click", () => turnTo(currentPage - 1));
