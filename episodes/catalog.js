@@ -49,6 +49,11 @@
       id: "episode-07",
       number: "07",
       title: "The Citywide Toy Rescue"
+    },
+    {
+      id: "episode-08",
+      number: "08",
+      title: "The North Beach Bookshop Heist"
     }
   ];
 
