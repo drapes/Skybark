@@ -1,6 +1,4 @@
-# Skybark
-
-## [Read Skybark & Bitebolt on GitHub Pages](https://drapes.github.io/Skybark)
+<a href="https://drapes.github.io/Skybark"><img src="assets/titles/skybark-bitebolt-masthead.png" alt="Skybark & Bitebolt" width="720"></a>
 
 Tiny heroes. Big barks. Suspiciously coordinated cats.
 
