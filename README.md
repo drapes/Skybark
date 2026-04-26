@@ -1,4 +1,6 @@
-<a href="https://drapes.github.io/Skybark"><img src="assets/titles/skybark-bitebolt-masthead.png" alt="Skybark & Bitebolt" width="720"></a>
+<p align="center">
+  <a href="https://drapes.github.io/Skybark"><img src="assets/titles/skybark-bitebolt-masthead.png" alt="Skybark & Bitebolt" width="720"></a>
+</p>
 
 Tiny heroes. Big barks. Suspiciously coordinated cats.
 
