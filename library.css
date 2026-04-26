@@ -202,10 +202,10 @@ a {
 
 .episode {
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 12px;
+  grid-template-rows: auto minmax(76px, auto);
+  gap: 10px;
   position: relative;
-  padding: 12px;
+  padding: 10px;
   overflow: hidden;
   border: 2px solid rgba(244, 200, 78, 0.72);
   border-radius: 8px;
@@ -262,21 +262,24 @@ a {
 .episode-meta {
   position: relative;
   z-index: 1;
-  min-height: 78px;
+  min-height: 76px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 46px;
-  gap: 12px;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  gap: 14px;
+  align-items: center;
+  padding: 2px 0 0;
 }
 
 .episode-copy {
   min-width: 0;
+  display: grid;
+  gap: 4px;
+  align-content: center;
 }
 
 .episode-detail {
   position: relative;
   display: block;
-  margin-bottom: 5px;
   color: var(--gold);
   font-size: 0.74rem;
   font-weight: 900;
@@ -285,9 +288,9 @@ a {
 }
 
 .episode-meta > .status-badge {
-  width: 42px;
+  width: 46px;
   aspect-ratio: 1;
-  place-self: end;
+  place-self: center end;
   border: 1px solid var(--ink);
   border-radius: 999px;
   object-fit: cover;
@@ -304,7 +307,7 @@ a {
 .episode h2 {
   position: relative;
   min-height: 2.4em;
-  margin: 0 0 6px;
+  margin: 0;
   color: var(--cream);
   font-size: 1.05rem;
   line-height: 1.2;
@@ -313,15 +316,6 @@ a {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-}
-
-.episode p {
-  position: relative;
-  margin: 0;
-  color: var(--gold);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 @media (max-width: 720px) {
