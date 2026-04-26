@@ -1,6 +1,7 @@
 const episodeList = document.querySelector("#episodeList");
 const filterButtons = document.querySelectorAll(".filter-button");
 const progressCookieName = "skybarkReadProgress";
+const libraryPage = document.body.dataset.libraryPage === "vault" ? "vault" : "main";
 const statusAssets = {
   new: "assets/status/new.png",
   partial: "assets/status/partial.png",
@@ -13,6 +14,14 @@ const statusLabels = {
 };
 
 let activeFilter = "all";
+
+function episodeIsPublished(episode) {
+  return episode.published !== false;
+}
+
+function episodeBelongsOnCurrentPage(episode) {
+  return libraryPage === "vault" ? !episodeIsPublished(episode) : episodeIsPublished(episode);
+}
 
 function readCookie(name) {
   const prefix = `${name}=`;
@@ -82,7 +91,7 @@ function buildEpisodeCard(episode, status) {
 }
 
 function renderLibrary() {
-  const episodes = window.SKYBARK_EPISODES || [];
+  const episodes = (window.SKYBARK_EPISODES || []).filter(episodeBelongsOnCurrentPage);
   const progress = readProgress();
   const visibleEpisodes = activeFilter === "all"
     ? episodes
@@ -93,7 +102,9 @@ function renderLibrary() {
   if (cards.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-state";
-    empty.textContent = "No episodes match this status yet.";
+    empty.textContent = episodes.length === 0
+      ? "The vault is empty."
+      : "No episodes match this status yet.";
     episodeList.replaceChildren(empty);
     return;
   }
