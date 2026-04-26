@@ -18,62 +18,74 @@
     {
       id: "episode-01",
       number: "01",
-      title: "The Missing Sunbeam"
+      title: "The Missing Sunbeam",
+      published: true
     },
     {
       id: "episode-02",
       number: "02",
-      title: "The Great Flood"
+      title: "The Great Flood",
+      published: true
     },
     {
       id: "episode-03",
       number: "03",
-      title: "The Palo Alto Squiral Siege"
+      title: "The Palo Alto Squiral Siege",
+      published: true
     },
     {
       id: "episode-04",
       number: "04",
-      title: "The Calgary Cup Caper"
+      title: "The Calgary Cup Caper",
+      published: true
     },
     {
       id: "episode-05",
       number: "05",
-      title: "The Sutro Surfkite Rescue"
+      title: "The Sutro Surfkite Rescue",
+      published: true
     },
     {
       id: "episode-06",
       number: "06",
-      title: "The Sonoma Cheese Flight"
+      title: "The Sonoma Cheese Flight",
+      published: true
     },
     {
       id: "episode-07",
       number: "07",
-      title: "The Citywide Toy Rescue"
+      title: "The Citywide Toy Rescue",
+      published: true
     },
     {
       id: "episode-08",
       number: "08",
-      title: "The North Beach Bookshop Heist"
+      title: "The North Beach Bookshop Heist",
+      published: true
     },
     {
       id: "episode-09",
       number: "09",
-      title: "The Colma Brain Drain"
+      title: "The Colma Brain Drain",
+      published: true
     },
     {
       id: "episode-10",
       number: "10",
-      title: "The Alcatraz Zoomie Breakout"
+      title: "The Alcatraz Zoomie Breakout",
+      published: true
     },
     {
       id: "episode-11",
       number: "11",
-      title: "The Penguin Heat Heist"
+      title: "The Penguin Heat Heist",
+      published: true
     },
     {
       id: "episode-12",
       number: "12",
-      title: "The Golden Gate Picnic Pinch"
+      title: "The Golden Gate Picnic Pinch",
+      published: true
     }
   ];
 
