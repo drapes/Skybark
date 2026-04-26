@@ -1,6 +1,7 @@
 const episodeList = document.querySelector("#episodeList");
 const filterButtons = document.querySelectorAll(".filter-button");
 const progressCookieName = "skybarkReadProgress";
+const libraryPage = document.body.dataset.libraryPage === "vault" ? "vault" : "main";
 const statusAssets = {
   new: "assets/status/new.png",
   partial: "assets/status/partial.png",
@@ -13,6 +14,14 @@ const statusLabels = {
 };
 
 let activeFilter = "all";
+
+function episodeIsPublished(episode) {
+  return episode.published !== false;
+}
+
+function episodeBelongsOnCurrentPage(episode) {
+  return libraryPage === "vault" ? !episodeIsPublished(episode) : episodeIsPublished(episode);
+}
 
 function readCookie(name) {
   const prefix = `${name}=`;
@@ -52,6 +61,7 @@ function buildEpisodeCard(episode, status) {
   const badge = document.createElement("img");
   const meta = document.createElement("span");
   const copy = document.createElement("span");
+  const detail = document.createElement("span");
   const title = document.createElement("h2");
   const action = document.createElement("p");
 
@@ -70,19 +80,21 @@ function buildEpisodeCard(episode, status) {
 
   meta.className = "episode-meta";
   copy.className = "episode-copy";
+  detail.className = "episode-detail";
 
-  title.textContent = `Episode ${episode.number}: ${episode.title}`;
+  detail.textContent = `Season ${episode.season} - Episode ${episode.episodeNumber}`;
+  title.textContent = episode.name;
   action.textContent = "Open reader";
 
   coverWrap.append(image);
-  copy.append(title, action);
+  copy.append(detail, title, action);
   meta.append(copy, badge);
   link.append(coverWrap, meta);
   return link;
 }
 
 function renderLibrary() {
-  const episodes = window.SKYBARK_EPISODES || [];
+  const episodes = (window.SKYBARK_EPISODES || []).filter(episodeBelongsOnCurrentPage);
   const progress = readProgress();
   const visibleEpisodes = activeFilter === "all"
     ? episodes
@@ -93,7 +105,9 @@ function renderLibrary() {
   if (cards.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-state";
-    empty.textContent = "No episodes match this status yet.";
+    empty.textContent = episodes.length === 0
+      ? "The vault is empty."
+      : "No episodes match this status yet.";
     episodeList.replaceChildren(empty);
     return;
   }

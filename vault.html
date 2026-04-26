@@ -3,28 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Adventures of Skybark and Bitebolt</title>
+    <title>Skybark &amp; Bitebolt Vault</title>
     <link rel="stylesheet" href="library.css?v=vault-flags">
   </head>
-  <body data-library-page="main">
+  <body data-library-page="vault">
     <main>
-      <header class="library-hero">
+      <header class="library-hero vault-hero">
+        <a class="library-return" href="index.html">Library</a>
         <div class="title-lockup">
-          <h1>The Adventures of Skybark and Bitebolt</h1>
+          <p class="vault-kicker">The Vault</p>
+          <h1>Skybark and Bitebolt Vault</h1>
           <img class="title-art" src="assets/titles/skybark-bitebolt-masthead.png" alt="The Adventures of Skybark & Bitebolt">
         </div>
       </header>
 
-      <nav class="status-filter" aria-label="Filter episodes by read status">
+      <nav class="status-filter" aria-label="Filter vault episodes by read status">
         <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
         <button class="filter-button" type="button" data-filter="new" aria-pressed="false">New</button>
         <button class="filter-button" type="button" data-filter="partial" aria-pressed="false">Reading</button>
         <button class="filter-button" type="button" data-filter="read" aria-pressed="false">Read</button>
       </nav>
 
-      <section class="episodes" id="episodeList" aria-label="Episodes"></section>
+      <section class="episodes" id="episodeList" aria-label="Vault episodes"></section>
     </main>
-    <a class="vault-link" href="vault.html" aria-label="Open the vault">π</a>
 
     <script src="episodes/catalog.js?v=vault-flags"></script>
     <script src="library.js?v=vault-flags"></script>

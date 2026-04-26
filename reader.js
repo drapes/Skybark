@@ -6,6 +6,7 @@ const pages = episode ? episode.pages : [];
 
 const readerShell = document.querySelector(".reader-shell");
 const episodeTitle = document.querySelector("#episodeTitle");
+const episodeMeta = document.querySelector("#episodeMeta");
 const book = document.querySelector("#book");
 const basePage = document.querySelector("#basePage");
 const flipSheet = document.querySelector("#flipSheet");
@@ -25,6 +26,7 @@ const fullscreenResumeButton = document.querySelector("#fullscreenResumeButton")
 const completionOverlay = document.querySelector("#completionOverlay");
 const completionExitButton = document.querySelector("#completionExitButton");
 const nextEpisodeLink = document.querySelector("#nextEpisodeLink");
+const libraryLinks = document.querySelectorAll('a.library-link[href="index.html"]');
 const progressCookieName = "skybarkReadProgress";
 
 let currentPage = 0;
@@ -80,8 +82,10 @@ function nextEpisodeForCurrent() {
     return undefined;
   }
 
-  const episodeIndex = episodes.findIndex((entry) => entry.id === episode.id);
-  return episodeIndex >= 0 ? episodes[episodeIndex + 1] : undefined;
+  const inVault = episode.published === false;
+  const siblingEpisodes = episodes.filter((entry) => inVault ? entry.published === false : entry.published !== false);
+  const episodeIndex = siblingEpisodes.findIndex((entry) => entry.id === episode.id);
+  return episodeIndex >= 0 ? siblingEpisodes[episodeIndex + 1] : undefined;
 }
 
 function saveProgress() {
@@ -97,6 +101,10 @@ function saveProgress() {
 
 function readerHref(episodeId) {
   return `reader.html?episode=${encodeURIComponent(episodeId)}`;
+}
+
+function libraryHrefForEpisode(targetEpisode = episode) {
+  return targetEpisode && targetEpisode.published === false ? "vault.html" : "index.html";
 }
 
 function updateResumeControls() {
@@ -123,7 +131,7 @@ function showCompletionOverlay() {
     nextEpisodeLink.setAttribute("aria-disabled", "false");
   } else {
     nextEpisodeLink.hidden = true;
-    nextEpisodeLink.href = "index.html";
+    nextEpisodeLink.href = libraryHrefForEpisode();
     nextEpisodeLink.setAttribute("aria-disabled", "true");
   }
 
@@ -380,7 +388,11 @@ function initReader() {
   }
 
   document.title = `Skybark & Bitebolt: ${episode.title}`;
-  episodeTitle.textContent = episode.title;
+  episodeTitle.textContent = episode.name;
+  episodeMeta.textContent = `Season ${episode.season} - Episode ${episode.episodeNumber}`;
+  libraryLinks.forEach((link) => {
+    link.href = libraryHrefForEpisode();
+  });
 
   preloadImages();
   buildThumbnails();

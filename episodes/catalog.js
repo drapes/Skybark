@@ -18,65 +18,109 @@
     {
       id: "episode-01",
       number: "01",
-      title: "The Missing Sunbeam"
+      name: "The Missing Sunbeam",
+      season: 1,
+      published: true
     },
     {
       id: "episode-02",
       number: "02",
-      title: "The Great Flood"
+      name: "The Great Flood",
+      season: 1,
+      published: true
     },
     {
       id: "episode-03",
       number: "03",
-      title: "The Palo Alto Squiral Siege"
+      name: "The Palo Alto Squiral Siege",
+      season: 1,
+      published: true
     },
     {
       id: "episode-04",
       number: "04",
-      title: "The Calgary Cup Caper"
+      name: "The Calgary Cup Caper",
+      season: 1,
+      published: true
     },
     {
       id: "episode-05",
       number: "05",
-      title: "The Sutro Surfkite Rescue"
+      name: "The Sutro Surfkite Rescue",
+      season: 1,
+      published: true
     },
     {
       id: "episode-06",
       number: "06",
-      title: "The Sonoma Cheese Flight"
+      name: "The Sonoma Cheese Flight",
+      season: 1,
+      published: true
     },
     {
       id: "episode-07",
       number: "07",
-      title: "The Citywide Toy Rescue"
+      name: "The Citywide Toy Rescue",
+      season: 1,
+      published: true
     },
     {
       id: "episode-08",
       number: "08",
-      title: "The North Beach Bookshop Heist"
+      name: "The North Beach Bookshop Heist",
+      season: 1,
+      published: true
     },
     {
       id: "episode-09",
       number: "09",
-      title: "The Colma Brain Drain"
+      name: "The Colma Brain Drain",
+      season: 1,
+      published: true
     },
     {
       id: "episode-10",
       number: "10",
-      title: "The Alcatraz Zoomie Breakout"
+      name: "The Alcatraz Zoomie Breakout",
+      season: 1,
+      published: true
+    },
+    {
+      id: "episode-11",
+      number: "11",
+      name: "The Penguin Heat Heist",
+      season: 1,
+      published: true
     },
     {
       id: "episode-12",
       number: "12",
-      title: "The Golden Gate Picnic Pinch"
+      name: "The Golden Gate Picnic Pinch",
+      season: 1,
+      published: true
     }
   ];
 
   window.SKYBARK_EPISODES = episodes.map((episode) => {
     const imageBase = `episodes/${episode.id}/images`;
+    const number = episode.episodeNumber || episode.number;
+    const name = episode.name || episode.title;
+    const season = episode.season || 1;
+    const title = episode.title || `Episode ${number}: ${name}`;
 
     return {
       ...episode,
+      title,
+      number,
+      episodeNumber: number,
+      name,
+      season,
+      meta: {
+        title,
+        episodeNumber: number,
+        name,
+        season
+      },
       imageBase,
       cover: `${imageBase}/cover.png`,
       pages: pageFiles.map((page) => ({
