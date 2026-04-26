@@ -1,5 +1,23 @@
 (function () {
-  const pageFiles = [
+  function buildPageFiles(pageCount, finalPage) {
+    const storyPages = Array.from({ length: pageCount }, (_, index) => {
+      const pageNumber = index + 1;
+      const paddedNumber = String(pageNumber).padStart(2, "0");
+
+      return {
+        title: `Page ${pageNumber}`,
+        file: `page-${paddedNumber}.png`
+      };
+    });
+
+    return [
+      { title: "Cover", file: "cover.png" },
+      ...storyPages,
+      finalPage
+    ];
+  }
+
+  const defaultPageFiles = [
     { title: "Cover", file: "cover.png" },
     { title: "Page 1", file: "page-01.png" },
     { title: "Page 2", file: "page-02.png" },
@@ -98,6 +116,46 @@
       name: "The Golden Gate Picnic Pinch",
       season: 1,
       published: true
+    },
+    {
+      id: "episode-13",
+      number: "01",
+      name: "Suitcase Shadows",
+      season: "S1",
+      arc: "The Weekend of Mr. W",
+      pageCount: 18,
+      finalPage: { title: "To Be Continued", file: "to-be-continued.png" },
+      published: false
+    },
+    {
+      id: "episode-14",
+      number: "02",
+      name: "Caws And Claws",
+      season: "S1",
+      arc: "The Weekend of Mr. W",
+      pageCount: 18,
+      finalPage: { title: "To Be Continued", file: "to-be-continued.png" },
+      published: false
+    },
+    {
+      id: "episode-15",
+      number: "03",
+      name: "The Whisperclaw War",
+      season: "S1",
+      arc: "The Weekend of Mr. W",
+      pageCount: 18,
+      finalPage: { title: "To Be Continued", file: "to-be-continued.png" },
+      published: false
+    },
+    {
+      id: "episode-16",
+      number: "04",
+      name: "The W Stands For Woof",
+      season: "S1",
+      arc: "The Weekend of Mr. W",
+      pageCount: 18,
+      finalPage: { title: "End", file: "end-silent.png" },
+      published: false
     }
   ];
 
@@ -107,6 +165,10 @@
     const name = episode.name || episode.title;
     const season = episode.season || 1;
     const title = episode.title || `Episode ${number}: ${name}`;
+    const pages = episode.pageFiles || buildPageFiles(
+      episode.pageCount || 10,
+      episode.finalPage || { title: "End", file: "end-silent.png" }
+    );
 
     return {
       ...episode,
@@ -123,7 +185,7 @@
       },
       imageBase,
       cover: `${imageBase}/cover.png`,
-      pages: pageFiles.map((page) => ({
+      pages: pages.map((page) => ({
         title: page.title,
         src: `${imageBase}/${page.file}`
       }))
