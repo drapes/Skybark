@@ -273,6 +273,17 @@ a {
   min-width: 0;
 }
 
+.episode-detail {
+  position: relative;
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .episode-meta > .status-badge {
   width: 42px;
   aspect-ratio: 1;

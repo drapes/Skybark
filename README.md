@@ -16,4 +16,4 @@ The Adventures of Skybark and Bitebolt
 - [Episode 11: The Penguin Heat Heist](reader.html?episode=episode-11)
 - [Episode 12: The Golden Gate Picnic Pinch](reader.html?episode=episode-12)
 
-`reader.html` is the shared comic reader. Episode metadata, cover paths, and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.
+`reader.html` is the shared comic reader. Episode metadata, including title, episode number, name, and season, plus cover paths and page lists live in `episodes/catalog.js`; each episode folder only needs its `images/` directory.

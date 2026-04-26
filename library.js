@@ -61,6 +61,7 @@ function buildEpisodeCard(episode, status) {
   const badge = document.createElement("img");
   const meta = document.createElement("span");
   const copy = document.createElement("span");
+  const detail = document.createElement("span");
   const title = document.createElement("h2");
   const action = document.createElement("p");
 
@@ -79,12 +80,14 @@ function buildEpisodeCard(episode, status) {
 
   meta.className = "episode-meta";
   copy.className = "episode-copy";
+  detail.className = "episode-detail";
 
-  title.textContent = `Episode ${episode.number}: ${episode.title}`;
+  detail.textContent = `Season ${episode.season} - Episode ${episode.episodeNumber}`;
+  title.textContent = episode.name;
   action.textContent = "Open reader";
 
   coverWrap.append(image);
-  copy.append(title, action);
+  copy.append(detail, title, action);
   meta.append(copy, badge);
   link.append(coverWrap, meta);
   return link;

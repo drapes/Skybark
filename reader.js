@@ -6,6 +6,7 @@ const pages = episode ? episode.pages : [];
 
 const readerShell = document.querySelector(".reader-shell");
 const episodeTitle = document.querySelector("#episodeTitle");
+const episodeMeta = document.querySelector("#episodeMeta");
 const book = document.querySelector("#book");
 const basePage = document.querySelector("#basePage");
 const flipSheet = document.querySelector("#flipSheet");
@@ -387,7 +388,8 @@ function initReader() {
   }
 
   document.title = `Skybark & Bitebolt: ${episode.title}`;
-  episodeTitle.textContent = episode.title;
+  episodeTitle.textContent = episode.name;
+  episodeMeta.textContent = `Season ${episode.season} - Episode ${episode.episodeNumber}`;
   libraryLinks.forEach((link) => {
     link.href = libraryHrefForEpisode();
   });
