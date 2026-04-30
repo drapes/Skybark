@@ -120,7 +120,7 @@
     {
       id: "episode-13",
       number: "01",
-      name: "Suitcase Shadows",
+      name: "The Weekend of Mr. W: Part 1: Suitcase Shadows",
       season: "S1",
       arc: "The Weekend of Mr. W",
       pageCount: 18,
@@ -130,7 +130,7 @@
     {
       id: "episode-14",
       number: "02",
-      name: "Caws And Claws",
+      name: "The Weekend of Mr. W: Part 2: Caws And Claws",
       season: "S1",
       arc: "The Weekend of Mr. W",
       pageCount: 18,
@@ -140,7 +140,7 @@
     {
       id: "episode-15",
       number: "03",
-      name: "The Whisperclaw War",
+      name: "The Weekend of Mr. W: Part 3: The Whisperclaw War",
       season: "S1",
       arc: "The Weekend of Mr. W",
       pageCount: 18,
@@ -150,7 +150,7 @@
     {
       id: "episode-16",
       number: "04",
-      name: "The W Stands For Woof",
+      name: "The Weekend of Mr. W: Part 4: The W Stands For Woof",
       season: "S1",
       arc: "The Weekend of Mr. W",
       pageCount: 18,
